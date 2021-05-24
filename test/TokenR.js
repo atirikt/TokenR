@@ -31,4 +31,30 @@ contract("TokenR", function(accounts){
       assert.equal(adminBalance.toNumber(), 1e7, "allocated initial supply to to admin")
     });
     });
+
+  it('transfer tokenR', function(){
+    return TokenR.deployed().then(function(Obj){
+      tokenObj = Obj;
+      return tokenObj.transfer.call(accounts[1], 1e10);
+    }).then(assert.fail).catch(function(error){
+      assert(error.message.indexOf('revert') >= 0, 'error must contain revert');
+      return tokenObj.transfer.call(accounts[1], 250000, {from:accounts[0]});
+    }).then(function(success){
+      assert.equal(success, true, 'transfer returns true');
+      return tokenObj.transfer(accounts[1],250000, {from: accounts[0]});
+    }).then(function(receipt){
+      assert.equal(receipt.logs[0].args._from, accounts[0], 'source account ok');
+      assert.equal(receipt.logs[0].args._to, accounts[1], 'source account ok');
+      assert.equal(receipt.logs[0].args._value, 250000, 'source account ok');
+      
+      return tokenObj.balanceOf(accounts[1]);
+    }).then(function(balance){
+      assert.equal(balance.toNumber(), 250000, 'amount added ok');
+      return tokenObj.balanceOf(accounts[0]);
+    }).then(function(balance){
+      assert.equal(balance.toNumber(), 1e7-250000, 'deduction ok');
+    });
+  })
+
+
   });
