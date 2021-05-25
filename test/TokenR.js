@@ -56,5 +56,33 @@ contract("TokenR", function(accounts){
     });
   })
 
+  it('delegated transfer', function(){
+    return TokenR.deployed().then(function(Obj){
+      tokenObj =Obj;
+      return tokenObj.approve.call(accounts[1], 100);
+    }).then(function(success){
+      assert.equal(success, true, 'returns true ok');
+      return tokenObj.approve(accounts[1], 100,{from:accounts[0]});
+    }).then(function(receipt){
+      assert.equal(receipt.logs[0].args._owner, accounts[0], 'source account ok');
+      assert.equal(receipt.logs[0].args._spender, accounts[1], 'source account ok');
+      assert.equal(receipt.logs[0].args._value, 100, 'source account ok');
+      return tokenObj.allowance(accounts[0], accounts[1]);
+    }).then(function(_value){
+      assert.equal(_value.toNumber(), 100, 'value ok');
+    })
+  })
+
+
+
+
+
+
+
+
+
+
+
+
 
   });
