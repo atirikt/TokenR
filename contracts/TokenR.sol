@@ -22,33 +22,33 @@ contract TokenR{
 
 	mapping(address => uint256) public balanceOf;
 
-	constructor(uint256 _initialSupply) public{
-		balanceOf[msg.sender] = _initialSupply;
-		totalSupply = _initialSupply;
+	constructor(uint256 _initialSupplyInWei) public{
+		balanceOf[msg.sender] = _initialSupplyInWei;
+		totalSupply = _initialSupplyInWei;
 	}
 
-	function transfer(address _to, uint256 _value) public returns(bool success){
-		require(balanceOf[msg.sender] >= _value, "balance is not enough");
-		balanceOf[msg.sender] -= _value;
-		balanceOf[_to] += _value;
-		emit Transfer(msg.sender, _to, _value);
+	function transfer(address _to, uint256 _valueInWei) public returns(bool success){
+		require(balanceOf[msg.sender] >= _valueInWei, "balance is not enough");
+		balanceOf[msg.sender] -= _valueInWei;
+		balanceOf[_to] += _valueInWei;
+		emit Transfer(msg.sender, _to, _valueInWei);
 		return true;
 	}
 
-	function approve (address _spender, uint256 _value) public returns(bool success){
-		allowance[msg.sender][_spender] = _value;
-		emit Approval(msg.sender, _spender, _value);
+	function approve (address _spender, uint256 _valueInWei) public returns(bool success){
+		allowance[msg.sender][_spender] = _valueInWei;
+		emit Approval(msg.sender, _spender, _valueInWei);
 		return true;		
 	}
 	
-	function transferFrom(address _from, address _to, uint256 _value) public returns(bool success){
+	function transferFrom(address _from, address _to, uint256 _valueInWei) public returns(bool success){
 
-		require(balanceOf[_from]>=_value, "balance less of source account");
-		require(allowance[_from][msg.sender]>=_value, "transfer value higher than approved");
-		allowance[_from][msg.sender] -= _value;
-		balanceOf[_from] -= _value;
-		balanceOf[_to] += _value;
-		emit Transfer(_from, _to, _value);
+		require(balanceOf[_from]>=_valueInWei, "balance less of source account");
+		require(allowance[_from][msg.sender]>=_valueInWei, "transfer value higher than approved");
+		allowance[_from][msg.sender] -= _valueInWei;
+		balanceOf[_from] -= _valueInWei;
+		balanceOf[_to] += _valueInWei;
+		emit Transfer(_from, _to, _valueInWei);
 		return true;
 	}
 
