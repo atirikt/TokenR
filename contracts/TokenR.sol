@@ -22,33 +22,36 @@ contract TokenR{
 
 	mapping(address => uint256) public balanceOf;
 
-	constructor(uint256 _initialSupplyInWei) public{
-		balanceOf[msg.sender] = _initialSupplyInWei;
-		totalSupply = _initialSupplyInWei;
+	constructor(uint256 _initialSupplyXe16) public{
+		balanceOf[msg.sender] = _initialSupplyXe16;
+		totalSupply = _initialSupplyXe16;
 	}
 
-	function transfer(address _to, uint256 _valueInWei) public returns(bool success){
-		require(balanceOf[msg.sender] >= _valueInWei, "balance is not enough");
-		balanceOf[msg.sender] -= _valueInWei;
-		balanceOf[_to] += _valueInWei;
-		emit Transfer(msg.sender, _to, _valueInWei);
+	//_value in wei format(x 1e18) : price of 100 TokenR = 1 ether
+	// therefore 100*1e16 _value = 1 ether = 1e18 wei
+	// therefore 1 _value = 1 wei 
+	function transfer(address _to, uint256 _valueXe16) public returns(bool success){
+		require(balanceOf[msg.sender] >= _valueXe16, "balance is not enough");
+		balanceOf[msg.sender] -= _valueXe16;
+		balanceOf[_to] += _valueXe16;
+		emit Transfer(msg.sender, _to, _valueXe16);
 		return true;
 	}
 
-	function approve (address _spender, uint256 _valueInWei) public returns(bool success){
-		allowance[msg.sender][_spender] = _valueInWei;
-		emit Approval(msg.sender, _spender, _valueInWei);
+	function approve (address _spender, uint256 _valueXe16) public returns(bool success){
+		allowance[msg.sender][_spender] = _valueXe16;
+		emit Approval(msg.sender, _spender, _valueXe16);
 		return true;		
 	}
 	
-	function transferFrom(address _from, address _to, uint256 _valueInWei) public returns(bool success){
+	function transferFrom(address _from, address _to, uint256 _valueXe16) public returns(bool success){
 
-		require(balanceOf[_from]>=_valueInWei, "balance less of source account");
-		require(allowance[_from][msg.sender]>=_valueInWei, "transfer value higher than approved");
-		allowance[_from][msg.sender] -= _valueInWei;
-		balanceOf[_from] -= _valueInWei;
-		balanceOf[_to] += _valueInWei;
-		emit Transfer(_from, _to, _valueInWei);
+		require(balanceOf[_from]>=_valueXe16, "balance less of source account");
+		require(allowance[_from][msg.sender]>=_valueXe16, "transfer value higher than approved");
+		allowance[_from][msg.sender] -= _valueXe16;
+		balanceOf[_from] -= _valueXe16;
+		balanceOf[_to] += _valueXe16;
+		emit Transfer(_from, _to, _valueXe16);
 		return true;
 	}
 

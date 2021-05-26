@@ -1,0 +1,223 @@
+{
+  "contractName": "SellTokenR",
+  "abi": [
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/anupamkumar/blockchain/TokenR/contracts/SellTokenR.sol\":\"SellTokenR\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/anupamkumar/blockchain/TokenR/contracts/SellTokenR.sol\":{\"keccak256\":\"0x4218aab458cff3f42c2b7788a46828fa3febb444b7c9b64d936913330eb6d86b\",\"urls\":[\"bzz-raw://cddc5b8c9acf81c63a933bcd2e70c6d69dd3281d2b8134217115e9a17db8f7fb\",\"dweb:/ipfs/QmdUjq19MjspbgZPiNCHw8hZR4fSKXCD1zKYeh1MghnsGQ\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a723158202b7c8f5017a248f1f0bd7804c16dea2e704e0a4952a391707bc08eabef589a1864736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a723158202b7c8f5017a248f1f0bd7804c16dea2e704e0a4952a391707bc08eabef589a1864736f6c63430005100032",
+  "sourceMap": "34:52:0:-;;;57:27;8:9:-1;5:2;;;30:1;27;20:12;5:2;57:27:0;34:52;;;;;;",
+  "deployedSourceMap": "34:52:0:-;;;;;",
+  "source": "pragma solidity >=0.4.22 <0.9.0;\n\ncontract SellTokenR{\n\n\tconstructor() public{\n\t\t\n\t}\n}",
+  "sourcePath": "/Users/anupamkumar/blockchain/TokenR/contracts/SellTokenR.sol",
+  "ast": {
+    "absolutePath": "/Users/anupamkumar/blockchain/TokenR/contracts/SellTokenR.sol",
+    "exportedSymbols": {
+      "SellTokenR": [
+        6
+      ]
+    },
+    "id": 7,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6,
+        "linearizedBaseContracts": [
+          6
+        ],
+        "name": "SellTokenR",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4,
+              "nodeType": "Block",
+              "src": "77:7:0",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 5,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "68:2:0"
+            },
+            "returnParameters": {
+              "id": 3,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "77:0:0"
+            },
+            "scope": 6,
+            "src": "57:27:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 7,
+        "src": "34:52:0"
+      }
+    ],
+    "src": "0:86:0"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/Users/anupamkumar/blockchain/TokenR/contracts/SellTokenR.sol",
+      "exportedSymbols": {
+        "SellTokenR": [
+          6
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.4",
+            ".22",
+            "<",
+            "0.9",
+            ".0"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            6
+          ],
+          "name": "SellTokenR",
+          "scope": 7
+        },
+        "children": [
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": true,
+              "kind": "constructor",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "scope": 6,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2,
+                "name": "ParameterList",
+                "src": "68:2:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 3,
+                "name": "ParameterList",
+                "src": "77:0:0"
+              },
+              {
+                "attributes": {
+                  "statements": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 4,
+                "name": "Block",
+                "src": "77:7:0"
+              }
+            ],
+            "id": 5,
+            "name": "FunctionDefinition",
+            "src": "57:27:0"
+          }
+        ],
+        "id": 6,
+        "name": "ContractDefinition",
+        "src": "34:52:0"
+      }
+    ],
+    "id": 7,
+    "name": "SourceUnit",
+    "src": "0:86:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x4AA4335bDDcf395Ea032A8D8820Dd5fFeDFB2F6a",
+      "transactionHash": "0x7ea06d249e494ed1f50226348ae7e7a1657fe12f52f5fb139e7704c48f588f9a"
+    }
+  },
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-05-26T18:47:19.620Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
