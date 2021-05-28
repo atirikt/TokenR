@@ -10,6 +10,8 @@ contract('SellTokenR', function(accounts){
   var buyer = accounts[1];
   var numberOfTokens;
   var tokensAvailable = 5e14; //50% of supply
+  let AdminBalance;
+
 
   it('initializes contract correctly',function(){
     return SellTokenR.deployed().then(function(Obj){
@@ -64,6 +66,45 @@ contract('SellTokenR', function(accounts){
     })
   })
 
+  it('check eth/wei balance before end.',async function(){
+    AdminBalanceInit = await web3.eth.getBalance(admin);
+    let sellContractBalance = await web3.eth.getBalance(tokenSellObj.address);
+    //console.log(sellContractBalance +'\n'+ AdminBalance);
+  })
+
+
+  it('end the selling', function(){
+    return TokenR.deployed().then(function(Obj){
+      tokenObj = Obj;
+      return SellTokenR.deployed();
+    }).then(function(Obj){
+      tokenSellObj = Obj;
+      return tokenSellObj.endSell({from: accounts[1]});
+    }).then(assert.fail).catch(function(error){
+      assert(error.message.indexOf('revert') >= 0, 'account is not admin')
+      return tokenSellObj.endSell({from:admin});
+    }).then(function(receipt){
+      //console.log(receipt);
+      return tokenObj.balanceOf(admin);
+    }).then(function(balance){
+      //console.log(balance.toNumber());
+      assert.equal(balance.toNumber(), 999999000000000, "balance of admin ok"); //10 TokenR deducted
+      return tokenSellObj.tokenPrice();
+    }).then(assert.fail).catch(function(error){
+      assert(error.message.indexOf('not using the correct ABI') >=0, 'the contract is destroyed, DO NOT INTERACT with it');
+    })
+  })
+
+  it('check eth/wei balance after end.',async function(){
+    let AdminBalance = await web3.eth.getBalance(admin);
+    let sellContractBalance = await web3.eth.getBalance(tokenSellObj.address);
+    //console.log(sellContractBalance+'\n' + AdminBalance);
+    assert.equal(sellContractBalance, 0, 'destroyed contract balance is 0');
+    //not checking admin balance as the value expected is higher than supported by js
+    //var AdminBalanceN = web3.utils.toBN(AdminBalance);
+    //var AdminBalanceInitN = web3.utils.toBN(AdminBalanceInit);
+    //assert.isAbove(AdminBalanceN.toNumber(), AdminBalanceInitN.toNumber(), 'admin balance updated after sell');
+  })
 
 
 })

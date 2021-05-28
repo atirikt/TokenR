@@ -3,7 +3,7 @@ pragma solidity >=0.4.22 <0.9.0;
 import "./TokenR.sol";
 
 contract SellTokenR{
-	address admin;
+	address payable admin;
 	TokenR public tokenContract;
 	uint256 public tokenPrice;
 	uint256 public tokenSold;
@@ -12,12 +12,18 @@ contract SellTokenR{
 		address _buyer,
 		uint256 _numberOfTokens
 	);
-
+	
 	constructor(TokenR _tokenContract, uint256 _tokenPrice) public{
 		admin = msg.sender;
 		tokenContract = _tokenContract;
 		tokenPrice = _tokenPrice;
 	}
+
+	modifier onlyAdmin(){
+		require (msg.sender == admin, 'account not authorised to end sale.');
+		_;
+	}
+
 	function multiply(uint x, uint y) internal pure returns(uint z){
 		require(y == 0 || (z = x * y) / y == x);
 	}
@@ -32,4 +38,9 @@ contract SellTokenR{
 		emit TokenSell(msg.sender, _numOfTokens);
 	}
 	
+	function endSell() onlyAdmin public{
+		//transfer amount of tokens from contract to admin
+		require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
+		selfdestruct(admin);
+	}
 }
