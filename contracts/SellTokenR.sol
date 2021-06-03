@@ -12,7 +12,7 @@ contract SellTokenR{
 		address _buyer,
 		uint256 _numberOfTokens
 	);
-	
+
 	constructor(TokenR _tokenContract, uint256 _tokenPrice) public{
 		admin = msg.sender;
 		tokenContract = _tokenContract;
@@ -26,6 +26,10 @@ contract SellTokenR{
 
 	function multiply(uint x, uint y) internal pure returns(uint z){
 		require(y == 0 || (z = x * y) / y == x);
+	}
+
+	function IsAdmin(address inputAddress) public returns(bool){
+		return (inputAddress == admin);
 	}
 
 	function buyTokens (uint256 _numOfTokens) public payable {
