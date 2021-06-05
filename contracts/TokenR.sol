@@ -14,6 +14,12 @@ contract TokenR{
 		uint256 _value
 	);
 
+	event Remit(
+		address indexed _from,
+		address indexed _to,
+		uint256 _value
+	);
+
 	event Approval(
 		address indexed _owner,
 		address indexed _spender,
@@ -40,12 +46,21 @@ contract TokenR{
 		return true;
 	}
 
+	//for selling of tokens from TokenRSell contract
+	function remit (address _to, uint256 _value) public returns(bool success){
+		require(balanceOf[tx.origin]>=_value, "balance less of source account");
+		balanceOf[tx.origin] -= _value;
+		balanceOf[_to] += _value;
+		emit Remit(tx.origin, _to, _value);
+		return true;
+	}
+
 	function approve (address _spender, uint256 _value) public returns(bool success){
 		allowance[msg.sender][_spender] = _value;
 		emit Approval(msg.sender, _spender, _value);
 		return true;		
 	}
-	
+
 	function transferFrom(address _from, address _to, uint256 _value) public returns(bool success){
 
 		require(balanceOf[_from]>=_value, "balance less of source account");

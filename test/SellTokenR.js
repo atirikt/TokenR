@@ -45,7 +45,7 @@ contract('SellTokenR', function(accounts){
       return tokenSellObj.buyTokens(numberOfTokens, {from: buyer, value: value})
     }).then(function(receipt){
       assert.equal(receipt.logs.length, 1, 'length event ok');
-      assert.equal(receipt.logs[0].event, 'TokenSell', 'sell event ok');
+      assert.equal(receipt.logs[0].event, 'TokenBuy', 'buy event ok');
       assert.equal(receipt.logs[0].args._buyer, accounts[1], 'dest account ok');
       assert.equal(receipt.logs[0].args._numberOfTokens, numberOfTokens, 'val account ok');
       return tokenSellObj.tokenSold();
