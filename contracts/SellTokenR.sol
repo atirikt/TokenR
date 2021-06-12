@@ -33,7 +33,7 @@ contract SellTokenR{
 		require(y == 0 || (z = x * y) / y == x);
 	}
 
-	function IsAdmin(address inputAddress) public returns(bool){
+	function IsAdmin(address inputAddress) public view returns(bool){
 		return (inputAddress == admin);
 	}
 
