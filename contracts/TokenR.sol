@@ -7,6 +7,7 @@ contract TokenR{
 	string public symbol = 'TkR';
 	string public version = '0.0.0';
 	mapping (address=>mapping(address=>uint256)) public allowance;
+	address public sellTokenRAddress = "0x0";
 
 	event Transfer(
 		address indexed _from,
@@ -46,8 +47,13 @@ contract TokenR{
 		return true;
 	}
 
+	function updateSellContractAddress(address _sellTokenR) public onlyAdmin(msg.sender){
+		sellTokenRAddress = _sellTokenR;
+	}
+
 	//for selling of tokens from TokenRSell contract
 	function remit (address _to, uint256 _value) public returns(bool success){
+		require(msg.sender == sellTokenRAddress, "only Sell contract calls remit")
 		require(balanceOf[tx.origin]>=_value, "balance less of source account");
 		balanceOf[tx.origin] -= _value;
 		balanceOf[_to] += _value;
